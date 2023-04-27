@@ -1,112 +1,112 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ListItem = () => {
-  const itemValue = [
-    {
-      img: "../img/first.webp",
-      name: "Resort",
-      price: "5200 /- night",
-      location: "Pimplad Nasik, India",
-      address: "123 Street, New York, USA",
-      amenities: ["Swimming Pool", "3 Bed", "2 bath"],
-    },
-    {
-      img: "../img/first.webp",
-      name: "Hall",
-      price: "4,347 /- night",
-      location: "Golden Urban House For Sell",
-      address: " 123 Street, New York, USA",
-      amenities: ["Swimming Pool", "3 Bed", "2 bath"],
-    },
-    {
-      img: "../img/first.webp",
-      name: "Resort",
-      price: "5200 /- night",
-      location: "Pimplad Nasik, India",
-      address: "123 Street, New York, USA",
-      amenities: ["Swimming Pool", "3 Bed", "2 bath"],
-    },
-    {
-      img: "../img/first.webp",
-      name: "Resort",
-      price: "5200 /- night",
-      location: "Pimplad Nasik, India",
-      address: "123 Street, New York, USA",
-      amenities: ["Swimming Pool", "3 Bed", "2 bath"],
-    },
-    {
-      img: "../img/first.webp",
-      name: "Resort",
-      price: "5200 /- night",
-      location: "Pimplad Nasik, India",
-      address: "123 Street, New York, USA",
-      amenities: ["Swimming Pool", "3 Bed", "2 bath"],
-    },
-    {
-      img: "../img/first.webp",
-      name: "Resort",
-      price: "5200 /- night",
-      location: "Pimplad Nasik, India",
-      address: "123 Street, New York, USA",
-      amenities: ["Swimming Pool", "3 Bed", "2 bath"],
-    },
-    {
-      img: "../img/first.webp",
-      name: "Resort",
-      price: "5200 /- night",
-      location: "Pimplad Nasik, India",
-      address: "123 Street, New York, USA",
-      amenities: ["Swimming Pool", "3 Bed", "2 bath"],
-    },
-    {
-      img: "../img/first.webp",
-      name: "Resort",
-      price: "5200 /- night",
-      location: "Pimplad Nasik, India",
-      address: "123 Street, New York, USA",
-      amenities: ["Swimming Pool", "3 Bed", "2 bath"],
-    },
-    {
-      img: "../img/first.webp",
-      name: "Resort",
-      price: "5200 /- night",
-      location: "Pimplad Nasik, India",
-      address: "123 Street, New York, USA",
-      amenities: ["Swimming Pool", "3 Bed", "2 bath"],
-    },
-    {
-      img: "../img/first.webp",
-      name: "Resort",
-      price: "5200 /- night",
-      location: "Pimplad Nasik, India",
-      address: "123 Street, New York, USA",
-      amenities: ["Swimming Pool", "3 Bed", "2 bath"],
-    },
-    {
-      img: "../img/first.webp",
-      name: "Resort",
-      price: "5200 /- night",
-      location: "Pimplad Nasik, India",
-      address: "123 Street, New York, USA",
-      amenities: ["Swimming Pool", "3 Bed", "2 bath"],
-    },
-    {
-      img: "../img/first.webp",
-      name: "Resort",
-      price: "5200 /- night",
-      location: "Pimplad Nasik, India",
-      address: "123 Street, New York, USA",
-      amenities: ["Swimming Pool", "3 Bed", "2 bath"],
-    },
-  ];
+const ListItem = (props) => {
+  // const itemValue = [
+  //   {
+  //     img: "../img/first.webp",
+  //     name: "Resort",
+  //     price: "5200 /- night",
+  //     location: "Pimplad Nasik, India",
+  //     address: "123 Street, New York, USA",
+  //     amenities: ["Swimming Pool", "3 Bed", "2 bath"],
+  //   },
+  //   {
+  //     img: "../img/first.webp",
+  //     name: "Hall",
+  //     price: "4,347 /- night",
+  //     location: "Golden Urban House For Sell",
+  //     address: " 123 Street, New York, USA",
+  //     amenities: ["Swimming Pool", "3 Bed", "2 bath"],
+  //   },
+  //   {
+  //     img: "../img/first.webp",
+  //     name: "Resort",
+  //     price: "5200 /- night",
+  //     location: "Pimplad Nasik, India",
+  //     address: "123 Street, New York, USA",
+  //     amenities: ["Swimming Pool", "3 Bed", "2 bath"],
+  //   },
+  //   {
+  //     img: "../img/first.webp",
+  //     name: "Resort",
+  //     price: "5200 /- night",
+  //     location: "Pimplad Nasik, India",
+  //     address: "123 Street, New York, USA",
+  //     amenities: ["Swimming Pool", "3 Bed", "2 bath"],
+  //   },
+  //   {
+  //     img: "../img/first.webp",
+  //     name: "Resort",
+  //     price: "5200 /- night",
+  //     location: "Pimplad Nasik, India",
+  //     address: "123 Street, New York, USA",
+  //     amenities: ["Swimming Pool", "3 Bed", "2 bath"],
+  //   },
+  //   {
+  //     img: "../img/first.webp",
+  //     name: "Resort",
+  //     price: "5200 /- night",
+  //     location: "Pimplad Nasik, India",
+  //     address: "123 Street, New York, USA",
+  //     amenities: ["Swimming Pool", "3 Bed", "2 bath"],
+  //   },
+  //   {
+  //     img: "../img/first.webp",
+  //     name: "Resort",
+  //     price: "5200 /- night",
+  //     location: "Pimplad Nasik, India",
+  //     address: "123 Street, New York, USA",
+  //     amenities: ["Swimming Pool", "3 Bed", "2 bath"],
+  //   },
+  //   {
+  //     img: "../img/first.webp",
+  //     name: "Resort",
+  //     price: "5200 /- night",
+  //     location: "Pimplad Nasik, India",
+  //     address: "123 Street, New York, USA",
+  //     amenities: ["Swimming Pool", "3 Bed", "2 bath"],
+  //   },
+  //   {
+  //     img: "../img/first.webp",
+  //     name: "Resort",
+  //     price: "5200 /- night",
+  //     location: "Pimplad Nasik, India",
+  //     address: "123 Street, New York, USA",
+  //     amenities: ["Swimming Pool", "3 Bed", "2 bath"],
+  //   },
+  //   {
+  //     img: "../img/first.webp",
+  //     name: "Resort",
+  //     price: "5200 /- night",
+  //     location: "Pimplad Nasik, India",
+  //     address: "123 Street, New York, USA",
+  //     amenities: ["Swimming Pool", "3 Bed", "2 bath"],
+  //   },
+  //   {
+  //     img: "../img/first.webp",
+  //     name: "Resort",
+  //     price: "5200 /- night",
+  //     location: "Pimplad Nasik, India",
+  //     address: "123 Street, New York, USA",
+  //     amenities: ["Swimming Pool", "3 Bed", "2 bath"],
+  //   },
+  //   {
+  //     img: "../img/first.webp",
+  //     name: "Resort",
+  //     price: "5200 /- night",
+  //     location: "Pimplad Nasik, India",
+  //     address: "123 Street, New York, USA",
+  //     amenities: ["Swimming Pool", "3 Bed", "2 bath"],
+  //   },
+  // ];
   return (
     <div>
       <div className="container-xxl py-5">
         <div className="container">
           <div className="tab-content">
             <div className="row g-4">
-              {itemValue.map((item) => (
+              {props.eventData.map((item) => (
                 <div
                   className="col-lg-4 col-md-6 wow fadeInUp"
                   data-wow-delay="0.1s"
@@ -116,32 +116,34 @@ const ListItem = () => {
                       <Link to={"details"}>
                         <img
                           className="img-fluid"
-                          src={require("../img/first.webp")}
+                          src={
+                           item.images[0].url
+                          }
                           alt=""
                         />
                       </Link>
                       <div className="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                        {item.name}
+                        {item.venue_name}
                       </div>
                     </div>
                     <div className="p-4 pb-0">
                       <h5 className="text-primary mb-3">{item.price}</h5>
                       <a className="d-block h5 mb-2" href="">
-                        {item.location}
+                        {item.address}
                       </a>
                       <p>
                         <i className="fa fa-map-marker-alt text-primary me-2" />
                         {item.address}
                       </p>
                     </div>
-                    <div className="d-flex border-top">
+                    {/* <div className="d-flex border-top">
                       {item.amenities.map((value) => (
                         <small className="flex-fill text-center border-end py-2">
                           <i className="fa fa-ruler-combined text-primary me-2" />
                           {value}
                         </small>
                       ))}
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               ))}
