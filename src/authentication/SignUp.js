@@ -15,23 +15,48 @@ const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
   function createUser() {
     setIsLoading(true);
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    headers.append("Accept", "application/json");
-    fetch("http://localhost:3001/createUser", {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify({
+      email: email,
+      password: password,
+      fullname: userName,
+    });
+    var requestOptions = {
       method: "POST",
-      headers: {
-        headers,
-      },
-      body: { fullname: userName, email: email, password: password },
-    })
-      .then((res) => {
-        return res.json();
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:3001/createUser", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        console.log(result);
+        setIsLoading(false);
       })
-      .then((data) => {
-        console.log(data);
+      .catch((error) => {
+        console.log("error", error);
         setIsLoading(false);
       });
+    // setIsLoading(true);
+    // let headers = new Headers();
+    // headers.append("Content-Type", "application/json");
+    // headers.append("Accept", "application/json");
+    // fetch("http://localhost:3001/createUser", {
+    //   method: "POST",
+    //   headers: {
+    //     headers,
+    //   },
+    //   body: { fullname: userName, email: email, password: password },
+    // })
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     console.log(data);
+    //     setIsLoading(false);
+    //   });
   }
 
   const onNameChangeHandler = (event) => {

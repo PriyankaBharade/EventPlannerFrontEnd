@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import validator from "validator";
 import Modal from "../home/Modal.js";
+import { Alert, AlertTitle } from "@mui/material";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,26 +14,41 @@ const Login = () => {
   const [errorEmail, setEmailError] = useState(null);
   const [errorPassword, setPasswordError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [userData, setuserData] = useState({});
- 
+  const [isAlertShow, setIsAlertShow] = useState(null);
 
   function login() {
     setIsLoading(true);
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    headers.append("Accept", "application/json");
-    fetch("http://localhost:3001/login", {
-      method: 'POST',
-      headers: {
-        headers,
-      },
-      body: userData,
-    })
-      .then((res) => {
-        return res.json();
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("email", email);
+    urlencoded.append("password", password);
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:3001/login", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result.data);
+        if (result.data != null && result.data != undefined) {
+          setIsAlertShow(null);
+          navigate("/signup");
+        } else {
+          setIsAlertShow(result.message);
+          //alert((message = result.message));
+        }
+        setIsLoading(false);
       })
-      .then((data) => {
-        console.log(data);
+      .catch((error) => {
+        console.log("error", error);
+        setIsAlertShow(error.message);
+        // alert((message = error.message));
         setIsLoading(false);
       });
   }
@@ -53,14 +69,6 @@ const Login = () => {
       setPasswordError("Password should be contain atlest 6 charactors");
       return;
     }
-    setuserData({
-      email: "rohit@email.com",
-      password: "mypassword",
-    });
-    // var formData = new FormData();
-    // formData.append('email', JSON.stringify("rohit@email.com"));
-    // formData.append('password', JSON.stringify("mypassword"));
-    // console.log("Data", formData);
     login();
     setEmailError("");
     setPasswordError("");
@@ -73,43 +81,46 @@ const Login = () => {
   };
 
   return (
-    <div className="background">
-      <Modal show={isLoading} />
-      <div className="card">
-        <div className="child-bg">
-          <div className="child-item">
-            <img className="img" src={require("../img/first.webp")} />
-          </div>
-          <div className="child-item">
-            <h2 style={{ marginTop: 25, color: "#fbe9ed" }}>Login</h2>
-            <input
-              style={{ marginTop: 40 }}
-              className="input"
-              placeholder="Email"
-              onChange={onEmailChangeHandler}
-              type="email"
-            />
-            {errorEmail && <div style={{ color: "white" }}>{errorEmail}</div>}
-            <input
-              style={{ marginTop: 25 }}
-              className="input"
-              placeholder="Password"
-              onChange={onPasswordChangeHandler}
-              type="password"
-            />
-            {errorPassword && (
-              <div style={{ color: "white" }}>{errorPassword}</div>
-            )}
-            <button onClick={loginHandler} className="button">
-              Login
-            </button>
-            <a style={{ marginTop: 10, color: "#fbe9ed" }} href="/signup">
-              {signuplink}
-            </a>
+    <>
+      {isAlertShow != null ? <Alert severity="error">{isAlertShow}</Alert> : ""}
+      <div className="background">
+        <Modal show={isLoading} />
+        <div className="card">
+          <div className="child-bg">
+            <div className="child-item">
+              <img className="img" src={require("../img/first.webp")} />
+            </div>
+            <div className="child-item">
+              <h2 style={{ marginTop: 25, color: "#fbe9ed" }}>Login</h2>
+              <input
+                style={{ marginTop: 40 }}
+                className="input"
+                placeholder="Email"
+                onChange={onEmailChangeHandler}
+                type="email"
+              />
+              {errorEmail && <div style={{ color: "white" }}>{errorEmail}</div>}
+              <input
+                style={{ marginTop: 25 }}
+                className="input"
+                placeholder="Password"
+                onChange={onPasswordChangeHandler}
+                type="password"
+              />
+              {errorPassword && (
+                <div style={{ color: "white" }}>{errorPassword}</div>
+              )}
+              <button onClick={loginHandler} className="button">
+                Login
+              </button>
+              <a style={{ marginTop: 10, color: "#fbe9ed" }} href="/signup">
+                {signuplink}
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default Login;
