@@ -1,9 +1,43 @@
 
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import '../css/Global.css'
-const Details=()=>{
+import { useEffect, useState } from 'react'
+const Details=(props)=>{
+  const location = useLocation()
+  const [details, setDetails] = useState([])
+  useEffect(()=>{
+   if(details.length === 0){
+    console.log(props);
+    console.log(location.pathname.split('/')[2]);
+
+          var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        "id": location.pathname.split('/')[2]
+      });
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      fetch("http://localhost:3001/getVenueById", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          setDetails(result)
+          // setDetails([{"id":1,"venue_name":"RK HALL","address":"Phooti kothi","hostname":"Rohit","host_desc":"Bhut bdia aadmi...","location_review":"the best location","check_in_exp":"best checkin exp","about_us":"about us is everything good","amenities":"swimming pool, beds, badminton","price":"","images":[{"id":1,"url":"https://assets-news.housing.com/news/wp-content/uploads/2022/01/11220447/wedding-stage-decoration-shutterstock_1193416354-1200x700-compressed.jpg","venue_id":1},{"id":2,"url":"https://assets-news.housing.com/news/wp-content/uploads/2022/01/11220447/wedding-stage-decoration-shutterstock_1193416354-1200x700-compressed.jpg","venue_id":1}]}])
+          console.log('detials',details);
+          console.log('detials',details[0].id);
+        })
+        .catch(error => console.log('error', error));
+
+   }
+  },[details])
     const navigation = useNavigate()
-    return <div>
+    return details.length > 0 && <div>
           <div className="bg-white p-0">
     {/* Spinner Start */}
     {/* <div
@@ -20,6 +54,7 @@ const Details=()=>{
     </div> */}
     {/* Spinner End */}
     {/* Navbar Start */}
+
     <div className="container-fluid nav-bar bg-transparent">
       <nav className="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
         <a
@@ -59,39 +94,39 @@ const Details=()=>{
       <div className="row g-0 align-items-center flex-column-reverse flex-md-row">
         <div className="col-md-6 mt-lg-5">
           <h1 className="display-5 animated fadeIn mb-4">
-            Pimplad Nasik, India
+            {details[0]?.venue_name}
           </h1>
           <p>
             <i className="fa fa-map-marker-alt text-primary me-2" />
-            123 Street, New York, USA
+            {details[0]?.address}
           </p>
         </div>
         <div className="row">
           <div className="col-sm-6 p-0">
             <a href="">
-              <img className="img-fluid" src={require("../img/second.webp")} alt="" />
+              <img className="img-fluid" src={details[0]?.images[0]?.url} alt="" />
             </a>
           </div>
           <div className="col-sm-6">
             <div className="row">
               <div className="col-sm-6">
                 <a href="">
-                  <img className="img-fluid" src={require("../img/second.webp")} alt="" />
+                  <img className="img-fluid" src={details[0]?.images[1]?.url} alt="" />
                 </a>
               </div>
               <div className="col-sm-6">
                 <a href="">
-                  <img className="img-fluid" src={require("../img/second.webp")} alt="" />
+                  <img className="img-fluid" src={details[0]?.images[2]?.url} alt="" />
                 </a>
               </div>
               <div className="col-sm-6 mt-3">
                 <a href="">
-                  <img className="img-fluid" src={require("../img/second.webp")} alt="" />
+                  <img className="img-fluid" src={details[0]?.images[3]?.url} alt="" />
                 </a>
               </div>
               <div className="col-sm-6 mt-3">
                 <a href="">
-                  <img className="img-fluid" src={require("../img/second.webp")} alt="" />
+                  <img className="img-fluid" src={details[0]?.images[4]?.url} alt="" />
                 </a>
               </div>
             </div>
@@ -104,21 +139,20 @@ const Details=()=>{
       <div className="row">
         <div className="col-sm-7 mt-5">
           <div>
-            <h4>Entire villa hosted by Nidhi</h4>
+            <h4>Entire villa hosted by {details[0]?.hostname}</h4>
             <p className="mb-1">
               <i className="fa fa-map-marker-alt text-primary me-2" />
-              123 Street, New York, USA
+              {details[0]?.address}
             </p>
           </div>
-          <div>12 guests .2 bedrooms .2 beds .2 bathrooms</div>
+          {/* <div>12 guests .2 bedrooms .2 beds .2 bathrooms</div> */}
           <hr className="mb-4" />
           <div className="d-flex align-items-start">
             <i className="fas fa-user-alt text-primary" />
             <div className="ml-12">
-              <h4 className="text-dark fs-16">Nidhi is a Superhost</h4>
+              <h4 className="text-dark fs-16">{details[0]?.hostname} is a Superhost</h4>
               <p>
-                Superhosts are experienced, highly rated hosts who are committed
-                to providing great stays for their guests.
+                {details[0]?.host_desc}
               </p>
             </div>
           </div>
@@ -126,7 +160,7 @@ const Details=()=>{
             <i className="fa fa-map-marker-alt text-primary" />
             <div className="ml-12">
               <h4 className="text-dark fs-16">Great location</h4>
-              <p>100% of recent guests gave the location a 5-star rating.</p>
+              <p>{details[0]?.location_review}</p>
             </div>
           </div>
           <div className="d-flex align-items-start mt-2">
@@ -134,38 +168,27 @@ const Details=()=>{
             <div className="ml-12">
               <h4 className="text-dark fs-16">Great check-in experience</h4>
               <p>
-                100% of recent guests gave the check-in process a 5-star rating.
+                {details[0]?.check_in_exp}
               </p>
             </div>
           </div>
           <div className="mt-4">
             <h4>About Us</h4>
             <p>
-              Every booking includes free protection from Host cancellations,
-              listing inaccuracies, and other issues like trouble checking in.
+              {details[0]?.about_us}
             </p>
             <p>
-              With the glimpse of Greece right in the foothills of Lonavala
-              experience a luxurious stay in the Ekostay Santorini Villa in
-              Lonavala. This aesthetically pleasing and spacious villa has its
-              very own pool for you to take a dip and feel all the stress float
-              away. Enjoy your staycation with your loved ones in the midst of
-              the evergreen and cozy atmosphere in Khandala.
+              
             </p>
           </div>
           <div className="mt-4">
             <h4>What this place offers</h4>
-            <div>Kitchen</div>
-            <div>Wifi</div>
-            <div>Free parking on premises</div>
-            <div>TV</div>
-            <div>Pool</div>
-            <div>Air conditioning</div>
+            <div>{details[0]?.amenities}</div>
           </div>
         </div>
         <div className="col-sm-5 mt-5">
           <div className="white-card">
-            <h5>₹8,700 night</h5>
+            <h5>₹{details[0]?.price}</h5>
             <form>
               <div className="d-flex justify-content-between">
                 <div className="mb-3 w-50">
@@ -195,7 +218,7 @@ const Details=()=>{
                 className="form-select"
                 aria-label="Default select example"
               >
-                <option selected="">Guests</option>
+                <option value="">Guests</option>
                 <option value={1}>300-500 persons</option>
                 <option value={2}>500-1000 persons</option>
                 <option value={3}>1000-1500 persons</option>

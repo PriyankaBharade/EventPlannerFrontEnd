@@ -12,29 +12,34 @@ import Modal from './Modal.js'
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [eventData,setEventData] = useState([]);
+  const [searchItem,setSearchItem] = useState([]);
   useEffect(() => {
     getAllVanue();
   }, []);
 
-  function getAllVanue() {
-    setIsLoading(true);
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
-    headers.append("Accept", "application/json");
-    fetch("http://localhost:3001/getAllVenues", {
-      method: "GET",
-      headers: {
-        headers,
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setEventData(data)
-        setIsLoading(false);
-      });
+  function getAllVanue(value='') {
+    // setIsLoading(true);
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "searchString": value
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:3001/getAllVenues", requestOptions)
+  .then(response => response.json())
+  .then(result => {
+            setEventData(result)
+        // setIsLoading(false);
+  })
+  .catch(error => console.log('error', error));
   }
   return (
     <>
@@ -43,7 +48,10 @@ const Home = () => {
         {/* Navbar End */}
         {/* Header Start */}
         <Header />
-        <Search />
+        <Search onKeyChange={(value)=>{
+          // setSearchItem(value)
+          getAllVanue(value)
+        }} />
         {/* Header End */}
         {/* Search Start */}
         <Filter />

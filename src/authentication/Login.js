@@ -4,10 +4,12 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import validator from "validator";
 import Modal from "../home/Modal.js";
-import { Alert, AlertTitle } from "@mui/material";
+import { Alert, AlertTitle, Button } from "@mui/material";
+import "../home/modal.css";
+import AlertModal from "./AlertModal";
 
 const Login = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   let signuplink = `Please create your account`;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,6 +17,7 @@ const Login = () => {
   const [errorPassword, setPasswordError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isAlertShow, setIsAlertShow] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function login() {
     setIsLoading(true);
@@ -38,7 +41,7 @@ const Login = () => {
         console.log(result.data);
         if (result.data != null && result.data != undefined) {
           setIsAlertShow(null);
-          navigate("/signup");
+          setIsLoggedIn(true);
         } else {
           setIsAlertShow(result.message);
           //alert((message = result.message));
@@ -86,6 +89,7 @@ const Login = () => {
       <div className="background">
         <Modal show={isLoading} />
         <div className="card">
+          <AlertModal show={isLoggedIn} message="You are Login Successfully"/>
           <div className="child-bg">
             <div className="child-item">
               <img className="img" src={require("../img/first.webp")} />

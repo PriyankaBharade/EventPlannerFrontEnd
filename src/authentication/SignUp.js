@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Login.css";
 import validator from "validator";
 import Modal from "../home/Modal.js";
+import AlertModal from "./AlertModal";
 
 const SignUp = () => {
   const [userName, setUserName] = useState("");
@@ -13,6 +14,9 @@ const SignUp = () => {
   const [errorPassword, setPasswordError] = useState(null);
   const [errorEmail, setEmailError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [result, setResult] = useState("");
+
   function createUser() {
     setIsLoading(true);
     var myHeaders = new Headers();
@@ -30,14 +34,17 @@ const SignUp = () => {
     };
 
     fetch("http://localhost:3001/createUser", requestOptions)
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((result) => {
-        console.log(result);
+        console.log("result", result.message);
         setIsLoading(false);
+        setResult(result.message);
+        setIsLoggedIn(true);
       })
       .catch((error) => {
         console.log("error", error);
         setIsLoading(false);
+        // setResult(result.message);
       });
     // setIsLoading(true);
     // let headers = new Headers();
@@ -105,6 +112,7 @@ const SignUp = () => {
     <div className="background">
       <Modal show={isLoading} />
       <div className="card">
+        <AlertModal show={isLoggedIn} message={result} />
         <div className="child-bg">
           <div className="child-item">
             <img className="img" src={require("../img/first.webp")} />

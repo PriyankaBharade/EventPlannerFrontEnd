@@ -1,6 +1,6 @@
 import React from "react";
 
-const Search = () => {
+const Search = ({onKeyChange}) => {
   const search_array = [
     { id: 1, value: "San Francisco" },
     { id: 2, value: "New York" },
@@ -15,6 +15,7 @@ const Search = () => {
         <div className="col-md-6  pt-120">
           <h2 className="header-title text-center">Plan a event</h2>
           <input
+          onChange={(event)=>{onKeyChange(event.target.value)}}
             className="form-control"
             list="datalistOptions"
             id="exampleDataList"

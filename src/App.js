@@ -14,7 +14,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" Component={Home} />
-        <Route path="/details" Component={Details} />
+        <Route path="/details/:id" Component={Details} />
         <Route path="/payment" Component={Payment} />
         <Route path="/login" Component={Login} />
         <Route path="/signup" Component={SignUp} />

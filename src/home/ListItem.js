@@ -15,11 +15,11 @@ const ListItem = (props) => {
                 >
                   <div className="property-item rounded overflow-hidden">
                     <div className="position-relative overflow-hidden">
-                      <Link to={"details"}>
+                      <Link to={`details/${item.id}`}>
                         <img
                           className="img-fluid"
                           src={
-                           item.images[0].url
+                           item?.images[0]?.url
                           }
                           alt=""
                         />
@@ -55,7 +55,7 @@ const ListItem = (props) => {
       </div>
       {/* Property List End */}
       {/* Category Start */}
-      <div className="container-xxl py-5">
+      {/* <div className="container-xxl py-5">
         <div className="container">
           <div
             className="text-center mx-auto mb-5 wow fadeInUp"
@@ -128,7 +128,7 @@ const ListItem = (props) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
