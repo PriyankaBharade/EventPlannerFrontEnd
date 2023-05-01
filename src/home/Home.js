@@ -5,42 +5,44 @@ import Filter from "./Filter";
 import ListItem from "./ListItem";
 import Footer from "./Footer";
 import { useEffect, useState } from "react";
-import CircularProgress from "@mui/material/CircularProgress";
-import Modal from './Modal.js'
-
+import Modal from "./Modal.js";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [eventData,setEventData] = useState([]);
-  const [searchItem,setSearchItem] = useState([]);
+  const [eventData, setEventData] = useState([]);
+  const [searchItem, setSearchItem] = useState([]);
   useEffect(() => {
+    const value = localStorage.getItem("data");
+    console.log(value);
     getAllVanue();
   }, []);
 
-  function getAllVanue(value='') {
+  function getAllVanue(value = "") {
     // setIsLoading(true);
     var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Content-Type", "application/json");
 
-var raw = JSON.stringify({
-  "searchString": value
-});
+    var raw = JSON.stringify({
+      searchString: value,
+    });
 
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
-};
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
 
-fetch("http://localhost:3001/getAllVenues", requestOptions)
-  .then(response => response.json())
-  .then(result => {
-            setEventData(result)
+    fetch("http://localhost:3001/getAllVenues", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setEventData(result);
         // setIsLoading(false);
-  })
-  .catch(error => console.log('error', error));
+      })
+      .catch((error) => console.log("error", error));
   }
+
+  
   return (
     <>
       <Modal show={isLoading} />
@@ -48,16 +50,18 @@ fetch("http://localhost:3001/getAllVenues", requestOptions)
         {/* Navbar End */}
         {/* Header Start */}
         <Header />
-        <Search onKeyChange={(value)=>{
-          // setSearchItem(value)
-          getAllVanue(value)
-        }} />
+        <Search
+          onKeyChange={(value) => {
+            // setSearchItem(value)
+            getAllVanue(value);
+          }}
+        />
         {/* Header End */}
         {/* Search Start */}
         <Filter />
         {/* Search End */}
         {/* Property List Start */}
-        <ListItem eventData={eventData}/>
+        <ListItem eventData={eventData} />
         {/* Category End */}
         {/* Footer Start */}
         <Footer />

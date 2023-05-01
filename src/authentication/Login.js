@@ -38,20 +38,19 @@ const Login = () => {
     fetch("http://localhost:3001/login", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result.data);
+        console.log(result);
         if (result.data != null && result.data != undefined) {
           setIsAlertShow(null);
           setIsLoggedIn(true);
+          localStorage.setItem("data", JSON.stringify(result.data))
         } else {
           setIsAlertShow(result.message);
-          //alert((message = result.message));
         }
         setIsLoading(false);
       })
       .catch((error) => {
         console.log("error", error);
         setIsAlertShow(error.message);
-        // alert((message = error.message));
         setIsLoading(false);
       });
   }
@@ -85,11 +84,11 @@ const Login = () => {
 
   return (
     <>
-      {isAlertShow != null ? <Alert severity="error">{isAlertShow}</Alert> : ""}
       <div className="background">
         <Modal show={isLoading} />
         <div className="card">
           <AlertModal show={isLoggedIn} message="You are Login Successfully"/>
+          {isAlertShow != null ? <Alert severity="error">{isAlertShow}</Alert> : ""}
           <div className="child-bg">
             <div className="child-item">
               <img className="img" src={require("../img/first.webp")} />
