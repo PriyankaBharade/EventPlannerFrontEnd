@@ -13,11 +13,11 @@ const ListItem = (props) => {
                   className="col-lg-4 col-md-6 wow fadeInUp"
                   data-wow-delay="0.1s"
                 >
-                  <div className="property-item rounded overflow-hidden">
+                  <div className="property-item rounded overflow-hidden property-card">
                     <div className="position-relative overflow-hidden">
                       <Link to={`details/${item.id}`}>
                         <img
-                          className="img-fluid"
+                          className="img-fluid property-main-img"
                           src={
                            item?.images[0]?.url
                           }

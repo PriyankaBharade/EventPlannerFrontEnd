@@ -16,7 +16,7 @@ const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [result, setResult] = useState("");
-
+  const re = /^[A-Za-z]+$/;
   function createUser() {
     setIsLoading(true);
     var myHeaders = new Headers();
@@ -67,7 +67,9 @@ const SignUp = () => {
   }
 
   const onNameChangeHandler = (event) => {
-    setUserName(event.target.value);
+    if (re.test(event.target.value)) {
+      setUserName(event.target.value);
+    }
   };
   const onEmailHandler = (event) => {
     setEmail(event.target.value);
@@ -123,6 +125,7 @@ const SignUp = () => {
               style={{ marginTop: 40 }}
               className="input"
               placeholder="Name"
+              value={userName}
               onChange={onNameChangeHandler}
               type="text"
             />

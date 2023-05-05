@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 const Header = () => {
   const [userName, setUserName] = useState(null);
   useEffect(() => {
-    if (localStorage.getItem("data") != "null") {
+    if (localStorage.getItem("data") != null && localStorage.getItem("data") != "null") {
       const userInfo = JSON.parse(localStorage.getItem("data"));
       console.log(userInfo);
       userInfo.map((item) => setUserName(item.fullname));
