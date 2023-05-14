@@ -35,41 +35,6 @@ const Details = (props) => {
       <div>
         <div className="bg-white p-0">
           <Header />
-          {/* <div className="container-fluid nav-bar bg-transparent">
-            <nav className="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-              <a
-                href="index.html"
-                className="navbar-brand d-flex align-items-center text-center"
-              >
-                <h1 className="m-0 text-primary fs-24">#Myevent</h1>
-              </a>
-              <button
-                type="button"
-                className="navbar-toggler"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse"
-              >
-                <span className="navbar-toggler-icon" />
-              </button>
-              <div className="collapse navbar-collapse" id="navbarCollapse">
-                <div className="navbar-nav ms-auto">
-                  <a href="contact.html" className="nav-item nav-link">
-                    Contact
-                  </a>
-                </div>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#login"
-                >
-                  Login
-                </button>
-              </div>
-            </nav>
-          </div> */}
-          {/* Navbar End */}
-          {/* Header Start */}
           <div className="container bg-white p-0">
             <div className="row g-0 align-items-center flex-column-reverse flex-md-row">
               <div className="col-md-6 mt-lg-5">
